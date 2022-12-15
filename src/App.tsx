@@ -1,24 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
+import Title from './components/Title';
+import { MessageList } from './components/MessageList';
+import ContactList from './components/ContactList';
+import SendMessageForm from './components/SendMessageForm';
+import * as web3 from "@solana/web3.js";
 import './App.css';
 
+
 function App() {
+
+  const [recipient, setRecipient] = useState<string>("")
+  // const recipient = new web3.PublicKey("BHMfc26jnTGcTzPqNo9a8nvnu4PyAqAcAejKrjRaDXAu")
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Title recipient={recipient} setRecipient={setRecipient}/>
+      <div className="body">
+        {/* <ContactList contacts={contacts} /> */}
+        <div className="body-messages">
+          <MessageList recipient={recipient} />
+          <SendMessageForm recipient={recipient} />
+        </div>
+      </div>
     </div>
   );
 }
